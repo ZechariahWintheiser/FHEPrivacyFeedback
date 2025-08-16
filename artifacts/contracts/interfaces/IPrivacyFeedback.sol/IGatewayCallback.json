@@ -1,0 +1,58 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IGatewayCallback",
+  "sourceName": "contracts/interfaces/IPrivacyFeedback.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint128",
+          "name": "decryptedScaledSum",
+          "type": "uint128"
+        },
+        {
+          "internalType": "uint64",
+          "name": "decryptedCount",
+          "type": "uint64"
+        }
+      ],
+      "name": "callbackAverageRating",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "average",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "requestId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "decryptedValid",
+          "type": "bool"
+        }
+      ],
+      "name": "callbackValidation",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
