@@ -1,0 +1,96 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
+
+import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
+import "./PrivacyFeedbackSystem.sol";
+
+/**
+ * @title DeploymentScript
+ * @notice Deployment script for PrivacyFeedbackSystem with UUPS proxy
+ * @dev Run with: npx hardhat run scripts/deploy.js --network <network>
+ */
+
+/*
+DEPLOYMENT GUIDE:
+
+1. Prerequisites:
+   - Set environment variables in .env file
+   - Ensure sufficient ETH for deployment
+   - Configure network in hardhat.config.js
+
+2. Deployment Steps:
+   a) Deploy implementation contract
+   b) Deploy proxy contract pointing to implementation
+   c) Initialize through proxy
+   d) Grant roles to designated addresses
+   e) Verify contracts on Etherscan
+
+3. Post-Deployment:
+   - Test basic functionality
+   - Set up monitoring
+   - Document contract addresses
+
+Example deployment command:
+   npx hardhat run scripts/deploy.js --network sepolia
+
+Gas Estimate (Sepolia):
+   - Implementation: ~3,500,000 gas
+   - Proxy: ~500,000 gas
+   - Initialization: ~200,000 gas
+   - Total: ~4,200,000 gas
+*/
+
+library DeploymentHelper {
+    /**
+     * @notice Deploy implementation contract
+     */
+    function deployImplementation() internal returns (address) {
+        PrivacyFeedbackSystem implementation = new PrivacyFeedbackSystem();
+        return address(implementation);
+    }
+
+    /**
+     * @notice Deploy and initialize proxy
+     */
+    function deployProxy(
+        address implementation,
+        address admin,
+        address pauser
+    ) internal returns (address) {
+        bytes memory initData = abi.encodeWithSelector(
+            PrivacyFeedbackSystem.initialize.selector,
+            admin,
+            pauser
+        );
+
+        ERC1967Proxy proxy = new ERC1967Proxy(implementation, initData);
+        return address(proxy);
+    }
+
+    /**
+     * @notice Setup roles after deployment
+     */
+    function setupRoles(
+        address proxyAddress,
+        address admin,
+        address pauser,
+        address upgrader,
+        address moderator
+    ) internal {
+        PrivacyFeedbackSystem system = PrivacyFeedbackSystem(payable(proxyAddress));
+
+        // Grant additional roles if needed
+        if (upgrader != admin) {
+            system.grantRole(system.UPGRADER_ROLE(), upgrader);
+        }
+
+        if (moderator != admin) {
+            system.grantRole(system.MODERATOR_ROLE(), moderator);
+        }
+
+        // Optionally set up multiple pausers
+        if (pauser != address(0)) {
+            system.grantRole(system.PAUSER_ROLE(), pauser);
+        }
+    }
+}
