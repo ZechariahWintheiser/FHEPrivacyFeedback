@@ -14,6 +14,8 @@ Built for the **Zama Bounty Program** - Demonstrating practical privacy-preservi
 
 **Try it now**: [https://fhe-peer-review.vercel.app/review.vercel.app/](https://fhe-peer-review.vercel.app/review.vercel.app/)
 
+**Demo Video**: [https://youtu.be/itbUtc31UMc](https://youtu.be/itbUtc31UMc)
+
 **Smart Contract**: [0x6829060333a916C9839B9DB70374357419b68fa6](https://sepolia.etherscan.io/address/0x6829060333a916C9839B9DB70374357419b68fa6)
 
 **Network**: Sepolia Testnet (Chain ID: 11155111)
