@@ -12,7 +12,7 @@ Built for the **Zama Bounty Program** - Demonstrating practical privacy-preservi
 
 ## 🌐 Live Demo
 
-**Try it now**: [https://fhe-peer-review.vercel.app/review.vercel.app/](https://fhe-peer-review.vercel.app/review.vercel.app/)
+**Try it now**: [https://fhe-privacy-feedback.vercel.app/](https://fhe-privacy-feedback.vercel.app/)
 
 **Demo Video**: [https://youtu.be/itbUtc31UMc](https://youtu.be/itbUtc31UMc)
 
